@@ -5,6 +5,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/express": "^4.17.13",
     "@types/jest": "^27.0.2",
     "@types/node": "^16.10.3",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
@@ -21,7 +22,14 @@
     "ts-node-dev": "^1.1.8",
     "typescript": "*"
   },
+  "scripts": {
+    "dev": "ts-node-dev --poll ./src/infra/server.ts",
+    "test": "jest"
+  },
   "dependencies": {
-    "axios": "^0.22.0"
+    "axios": "^0.22.0",
+    "express": "^4.17.1",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.6.0"
   }
 }
