@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
 /* eslint-disable eol-last */
-type GetType = {
+export type GetType = {
   url: string
   params: object
 }
