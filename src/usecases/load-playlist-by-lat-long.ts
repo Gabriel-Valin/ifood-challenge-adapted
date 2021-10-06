@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-throw-literal */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 
@@ -7,6 +8,7 @@ import env from '../config/env'
 import playlists from '../data/data-sources/playlists'
 import { Playlist } from '../domain/entities/playlist'
 import { ConvertKelvinToCelsius } from '../infra/convert-to-celsius-contract'
+import AppError from '../shared/errors/app-error'
 
 @injectable()
 export default class LoadPlaylistByLatitudeAndLongitude {
@@ -23,7 +25,7 @@ export default class LoadPlaylistByLatitudeAndLongitude {
   public async execute ({ latitude, longitude }): Promise<Playlist> {
     const resultWeather = await this.getClient.get({ url: `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&lang=pt_br&appid=${this.apiKey}` })
     const { temp } = resultWeather.main
-    if (!resultWeather) throw new Error('Client Error')
+    if (!resultWeather) throw new AppError('Required params: latitude and longitude')
 
     const isCelsius = this.parseCelsius.convert(temp)
 
