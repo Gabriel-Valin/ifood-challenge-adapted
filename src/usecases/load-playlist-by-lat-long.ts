@@ -25,7 +25,7 @@ export default class LoadPlaylistByLatitudeAndLongitude {
   public async execute ({ latitude, longitude }): Promise<Playlist> {
     const resultWeather = await this.getClient.get({ url: `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&lang=pt_br&appid=${this.apiKey}` })
     const { temp } = resultWeather.main
-    if (!resultWeather) throw new AppError('Required params: latitude and longitude')
+    if (!resultWeather) throw new AppError('City not exists!')
 
     const isCelsius = this.parseCelsius.convert(temp)
 

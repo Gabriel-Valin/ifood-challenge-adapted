@@ -21,9 +21,7 @@ export default class LoadPlaylistByTemperature {
   public async execute (city: any): Promise<Playlist> {
     const resultWeather = await this.getClient.get({ url: `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=pt_br&appid=${this.apiKey}` })
     const { temp } = resultWeather.main
-    if (!resultWeather) throw new AppError('Missing Param: city')
-
-    console.log(temp)
+    if (!resultWeather) throw new AppError('City not exists!')
 
     if (temp > 30) {
       return playlists.playlists.party
